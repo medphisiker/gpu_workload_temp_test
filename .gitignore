@@ -6,3 +6,5 @@
 # videos
 *.mp4
 
+# loggers files
+*.log

@@ -6,15 +6,11 @@ Docker-образ, содержащий рабочее окружение для
 
 * открываем терминал
 * клонируем репозиторий с помощью git clone
-* переходим в каталог `.devcontainer`, выполнив команду:
-```
- cd .devcontainer
-```
 
 * выполняем команду сборки:
 
 ```
-docker build -t yolov8_test:0.0.1 .
+docker build -t yolov8_test:0.0.1 -f .devcontainer/Dockerfile .
 ```
 
 # Запуск docker-контейнера
@@ -26,11 +22,11 @@ cd ..
 
 Выполним запуск контейнера следующей командой:
 ```
- docker run \
+docker run \
     --gpus all \
     --rm \
     -it \
-    -v ./yolov8:/workspace \
+    -v ./data:/workspace/data \
     yolov8_test:0.0.1
 ```
 
