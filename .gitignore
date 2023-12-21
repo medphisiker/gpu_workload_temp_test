@@ -1,0 +1,8 @@
+# deep learning models
+*.engine
+*.onnx
+*.pt
+
+# videos
+*.mp4
+
