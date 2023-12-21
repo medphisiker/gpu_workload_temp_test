@@ -6,7 +6,6 @@ import time
 import cv2
 import gdown
 import GPUtil
-import psutil
 import ultralytics
 from ultralytics import YOLO
 
@@ -47,8 +46,12 @@ def setup_logger(logger_name, log_file, level=logging.INFO):
 if __name__ == "__main__":
     yolov8_seg = "yolov8l-seg"
     yolov8_pose = "yolov8l-pose"
-    load_period = "00:01:01"
-    temp_thresh = 80
+    load_period = "03:01:01"
+    temp_thresh = 80  # порог в 80C выше nVidia не рекомендует
+
+    # изменим на нужный нам
+    os.chdir("/workspace/data")
+    print(os.getcwd())  # выведет /workspace
 
     load_period = get_seconds(load_period)
 
@@ -61,17 +64,13 @@ if __name__ == "__main__":
     video_path = "dance.mp4"
     if not os.path.exists(video_path):
         print("Скачиваем видео с танцами")
-        
-        # короткое видео в 15 секунд для отладки
-        id = "1GSLeIBYqMCm_s0ji1yAob0czOQaLy8g_"
-        
-        # полное видео на 9 минут, для нагрузки
-        # id = "1HtjpDkM-BvBTIlYkU5UDwt0C9KU6z3Uv"
-        gdown.download(id=id, output=video_path, quiet=False)
 
-    # изменим на нужный нам
-    os.chdir("/workspace")
-    print(os.getcwd())  # выведет /workspace
+        # короткое видео в 15 секунд для отладки
+        # id = "1GSLeIBYqMCm_s0ji1yAob0czOQaLy8g_"
+
+        # полное видео на 9 минут, для нагрузки
+        id = "1HtjpDkM-BvBTIlYkU5UDwt0C9KU6z3Uv"
+        gdown.download(id=id, output=video_path, quiet=False)
 
     ultralytics.checks()
 
@@ -96,7 +95,7 @@ if __name__ == "__main__":
     start_time = time.time()
     working_time = 0
     stop_flag = False
-    
+
     while working_time < load_period and not stop_flag:
         # открываем видео файл
         cap = cv2.VideoCapture(video_path)
