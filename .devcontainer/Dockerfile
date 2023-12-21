@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y python3-opencv
 RUN pip install --no-cache opencv-python
 
 # установим другие нужные библиотеки
-RUN pip install --no-cache onnxruntime-gpu==1.16.3 gdown==4.7.1 GPUtil==1.4.0
+RUN pip install --no-cache onnxruntime-gpu==1.16.3 gdown==4.7.1 GPUtil==1.4.0 
+RUN pip install --no-cache lapx==0.5.5
 
 # установим kernel для Jupyter Notebook
 RUN pip install --no-cache ipykernel==6.23.0
@@ -25,4 +26,4 @@ WORKDIR /workspace
 
 COPY ./yolov8 /workspace
 
-# ENTRYPOINT ["python", "run.py"]
+ENTRYPOINT ["python", "run.py"]
