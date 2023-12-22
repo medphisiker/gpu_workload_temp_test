@@ -9,7 +9,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # для этого нам понадобится ее зависимость libgl1
 # см. https://stackoverflow.com/a/68666500
 RUN apt-get update && apt-get install -y python3-opencv
-RUN pip install --no-cache opencv-python
+RUN pip install --no-cache opencv-python==4.8.1.78
 
 # установим другие нужные библиотеки
 RUN pip install --no-cache onnxruntime-gpu==1.16.3 gdown==4.7.1 GPUtil==1.4.0 
